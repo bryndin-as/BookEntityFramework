@@ -9,7 +9,6 @@ namespace Book.ViewModels
 {
     public class MainWindowViewModel : ViewModel
     {
-
         private string _title = "Главное окно программы";
 
         public string Title
@@ -17,7 +16,5 @@ namespace Book.ViewModels
             get => _title;
             set => Set(ref _title, value);
         }
-
-
     }
 }
