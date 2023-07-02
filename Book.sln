@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book", "Book\Book.csproj", "{26477202-9C5F-4066-831C-11A245B3842A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Book", "Book\Book.csproj", "{26477202-9C5F-4066-831C-11A245B3842A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Book.DAL", "Book.DAL\Book.DAL.csproj", "{CFB3F03B-359A-438C-BCD4-B5BCE2EA61AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{26477202-9C5F-4066-831C-11A245B3842A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26477202-9C5F-4066-831C-11A245B3842A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26477202-9C5F-4066-831C-11A245B3842A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB3F03B-359A-438C-BCD4-B5BCE2EA61AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB3F03B-359A-438C-BCD4-B5BCE2EA61AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB3F03B-359A-438C-BCD4-B5BCE2EA61AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB3F03B-359A-438C-BCD4-B5BCE2EA61AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
