@@ -29,11 +29,13 @@ namespace Book.Data
                     case "SQLite":
                         opt.UseSqlite(configuration.GetConnectionString(type));
                         break;
-                    case "InMemory": 
+                    case "InMemory":
                         opt.UseInMemoryDatabase("TestBookNew.db");
                         break;
                 }
-            });
+            })
+            .AddTransient<DbInitializer>()
+            ;
 
 
 

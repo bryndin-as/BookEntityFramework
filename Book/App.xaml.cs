@@ -1,4 +1,5 @@
-﻿using Book.Data;
+﻿using Book.DAL.Context;
+using Book.Data;
 using Book.Services;
 using Book.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,12 @@ namespace Book
         protected override async void OnStartup(StartupEventArgs e)
         {
             var host = Host;
+
+            using(var scope = Services.CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<DbInitializer>().InitializeAsync().Wait();
+            }
+
             base.OnStartup(e);
             await host.StartAsync();
         }
