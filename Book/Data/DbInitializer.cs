@@ -23,11 +23,16 @@ namespace Book.Data
         public async Task InitializeAsync()
         {
             var timer = Stopwatch.StartNew();
-            Logger.
+            _Logger.LogInformation("Инициализация БД..");
 
+            _Logger.LogInformation("Удаление существующей БД..");
             await _db.Database.EnsureDeletedAsync().ConfigureAwait(false);
+            _Logger.LogInformation($"Удаление существующей БД выполнено за {0} мс", timer.ElapsedMilliseconds);
+
             //_db.Database.EnsureCreated();
+            _Logger.LogInformation("Миграция БД..");
             await _db.Database.MigrateAsync();
+            _Logger.LogInformation($"Миграция БД выполнена за {0} мс", timer.ElapsedMilliseconds);
 
             if (await _db.BooksElems.AnyAsync()) return;
 
@@ -36,6 +41,8 @@ namespace Book.Data
             await InitializerSellerss();
             await InitializerBuyerss();
             await InitializerDeal();
+
+            _Logger.LogInformation($"Инициализация БД выполнено за {0} с", timer.Elapsed.TotalSeconds);
         }
 
 
@@ -46,6 +53,11 @@ namespace Book.Data
 
         private async Task InitializerCategories()
         {
+
+            var timer = Stopwatch.StartNew();
+            _Logger.LogInformation($"Инициализация категорий");
+
+
             _Categories = new Category[__CategoriesCount];
             for (int i = 0; i < __CategoriesCount; i++)
             {
@@ -57,15 +69,22 @@ namespace Book.Data
 
             await _db.Categories.AddRangeAsync(_Categories);
             await _db.SaveChangesAsync();
+
+            _Logger.LogInformation($"Инициализация категорий выполнена за {0} мс", timer.ElapsedMilliseconds);
+
         }
-        
-        
+
+
         private const int __BookCount = 10;
 
         private BookElem[] _Books;
 
         private async Task InitializerBooks()
         {
+            var timer = Stopwatch.StartNew();
+            _Logger.LogInformation($"Инициализация книг");
+
+
             var rnd = new Random();
             _Books = Enumerable.Range(1, __BookCount).Select(i => new BookElem
             {
@@ -76,6 +95,9 @@ namespace Book.Data
 
             await _db.BooksElems.AddRangeAsync(_Books);
             await _db.SaveChangesAsync();
+
+            _Logger.LogInformation($"Инициализация книг выполнена за {0} мс", timer.ElapsedMilliseconds);
+
         }
 
 
@@ -85,6 +107,10 @@ namespace Book.Data
 
         private async Task InitializerSellerss()
         {
+            var timer = Stopwatch.StartNew();
+            _Logger.LogInformation($"Инициализация продавцов");
+
+
             var rnd = new Random();
             _Sellers = Enumerable.Range(1, __SellersCount).Select(i => new Seller
             {
@@ -96,6 +122,9 @@ namespace Book.Data
 
             await _db.Sellers.AddRangeAsync(_Sellers);
             await _db.SaveChangesAsync();
+
+            _Logger.LogInformation($"Инициализация продавцов выполнена за {0} мс", timer.ElapsedMilliseconds);
+
         }
 
         private const int __BuyersCount = 10;
@@ -104,6 +133,9 @@ namespace Book.Data
 
         private async Task InitializerBuyerss()
         {
+            var timer = Stopwatch.StartNew();
+            _Logger.LogInformation($"Инициализация покупателей");
+
             var rnd = new Random();
             _Buyers = Enumerable.Range(1, __BuyersCount).Select(i => new Buyer
             {
@@ -115,6 +147,9 @@ namespace Book.Data
 
             await _db.Buyers.AddRangeAsync(_Buyers);
             await _db.SaveChangesAsync();
+
+            _Logger.LogInformation($"Инициализация покупателей выполнена за {0} мс", timer.ElapsedMilliseconds);
+
         }
 
 
@@ -122,6 +157,9 @@ namespace Book.Data
 
         private async Task InitializerDeal()
         {
+            var timer = Stopwatch.StartNew();
+            _Logger.LogInformation($"Инициализация сделок");
+
             var rnd = new Random();
 
             var deals = Enumerable.Range(1, __DealsCount).Select(s => new Deal()
@@ -135,6 +173,9 @@ namespace Book.Data
 
             await _db.Deals.AddRangeAsync(deals);
             await _db.SaveChangesAsync();
+
+            _Logger.LogInformation($"Инициализация сделок выполнена за {0} мс", timer.ElapsedMilliseconds);
+
         }
 
 
