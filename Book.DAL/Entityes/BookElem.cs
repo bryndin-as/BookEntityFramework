@@ -10,5 +10,7 @@ namespace Book.DAL.Entityes
     public class BookElem : NamedEntity
     {
         public virtual Category Category { get; set; } // virtual для ленивой загрузки (не всегда хорошо)
+
+        public override string ToString() => $"Книга {Name}";
     }
 }

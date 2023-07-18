@@ -10,5 +10,8 @@ namespace Book.DAL.Entityes
         public virtual BookElem BookElem { get; set; }
         public virtual Seller Seller { get; set; }
         public virtual Buyer Buyer { get; set; }
+
+        public override string ToString() => $"Сделка по продаже {BookElem}: {Seller}, {Buyer}, {Price:C}";
+
     }
 }

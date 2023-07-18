@@ -1,17 +1,13 @@
 ﻿using Book.DAL.Context;
+using Book.DAL.Entityes;
 using Book.DAL.Entityes.Base;
 using Book.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Book.DAL
 {
     //Базовая реализация репозитория
-    public class DbRepository<T> : IRepository<T> where T : Entity, new()
+    internal class DbRepository<T> : IRepository<T> where T : Entity, new()
     {
         private readonly BookDB _dB;
         private readonly DbSet<T> _Set; // свойство набора данных из текущего репозитория
@@ -138,5 +134,29 @@ namespace Book.DAL
             }
         }
         #endregion
+
+
     }
+
+    class BooksRepository : DbRepository<BookElem>
+    {
+        public override IQueryable<BookElem> Items => base.Items.Include(item => item.Category);
+
+        public BooksRepository(BookDB dB) : base(dB)
+        {
+        }
+    }
+
+    class DealsRepository : DbRepository<Deal>
+    {
+        public override IQueryable<Deal> Items => base.Items
+            .Include(item => item.BookElem)
+            .Include(item => item.Seller)
+            .Include(item => item.Buyer);
+
+        public DealsRepository(BookDB dB) : base(dB)
+        {
+        }
+    }
+
 }

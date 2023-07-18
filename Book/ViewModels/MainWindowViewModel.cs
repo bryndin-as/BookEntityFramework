@@ -1,4 +1,6 @@
-﻿using MathCore.WPF.ViewModels;
+﻿using Book.DAL.Entityes;
+using Book.Interfaces;
+using MathCore.WPF.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace Book.ViewModels
     public class MainWindowViewModel : ViewModel
     {
 
+        private readonly IRepository<BookElem> _BooksRepository;
         private string _title = "Главное окно программы";
 
         public string Title
@@ -18,6 +21,11 @@ namespace Book.ViewModels
             set => Set(ref _title, value);
         }
 
+        public MainWindowViewModel(IRepository<BookElem> BooksRepository)
+        {
+            _BooksRepository = BooksRepository;
 
+            var books = BooksRepository.Items.Take(10).ToArray();
+        }
     }
 }

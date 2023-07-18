@@ -1,4 +1,5 @@
-﻿using Book.DAL.Context;
+﻿using Book.DAL;
+using Book.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ namespace Book.Data
                 }
             })
             .AddTransient<DbInitializer>()
+            .AddRepositoriesInDB()
             ;
 
 
